@@ -5,7 +5,7 @@ import {
 } from "./emailTemplates.js";
 import { mailTrapClient, sender } from "./mailtrap.config.js";
 
-export const sendVerficationEmail = async (email, verficatioToken) => {
+export const sendVerficationEmail = async (email, verficationToken) => {
   const receipient = [{ email }];
 
   try {
@@ -15,7 +15,7 @@ export const sendVerficationEmail = async (email, verficatioToken) => {
       subject: "Verfiy your email",
       html: VERIFICATION_EMAIL_TEMPLATE.replace(
         "{verificationCode}",
-        verficatioToken
+        verficationToken
       ),
       category: "Email Verfication",
     });

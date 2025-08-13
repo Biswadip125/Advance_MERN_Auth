@@ -93,3 +93,37 @@ export const PASSWORD_RESET_REQUEST_TEMPLATE = `
 </body>
 </html>
 `;
+
+export const WELCOME_EMAIL_TEMPLATE = `<!DOCTYPE html>
+<html lang="en" style="margin:0;padding:0;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome Email</title>
+</head>
+<body style="margin:0;padding:0;font-family: Arial, sans-serif;background-color:#f5f5f5;">
+  <table align="center" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;background-color:#ffffff;border-radius:8px;overflow:hidden;">
+    <tr>
+      <td style="text-align:center;padding:0;">
+        <img src="cid:welcomeImage" alt="Welcome Image" style="width:100%;height:auto;display:block;" />
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:24px;text-align:left;">
+        <h1 style="font-size:22px;color:#000000;margin:0 0 12px 0;">{username}!</h1>
+        <p style="font-size:16px;color:#444444;margin:0 0 16px 0;">
+          Thanks for choosing Auth Company! We are happy to see you on board.
+        </p>
+        <p style="font-size:16px;color:#444444;margin:0 0 24px 0;">
+          To get started, do this next step:
+        </p>
+        <a href="https://your-next-step-link.com" 
+           style="display:inline-block;padding:12px 24px;background-color:#4285f4;color:#ffffff;text-decoration:none;border-radius:6px;font-size:16px;">
+          Next Step
+        </a>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+`;
