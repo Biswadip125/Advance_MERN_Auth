@@ -2,14 +2,27 @@ import { motion } from "motion/react";
 import Input from "../components/Input";
 import { Loader, Lock, Mail } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/authStore";
+import toast from "react-hot-toast";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const { login, isLoading, error } = useAuthStore();
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    try {
+      const res = await login(email, password);
+
+      if (res.success) {
+        navigate("/");
+        toast.success(res.message);
+      }
+    } catch (err) {
+      console.log("Error during login:", err);
+    }
   };
   return (
     <motion.div
@@ -37,6 +50,10 @@ const LoginPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
+          {/*Error Message */}
+          {error && <p className="text-red-500 font-semibold mb-2">{error}</p>}
+
           <div className="flex items-center mb-6">
             <Link
               to={"forgot-password"}
