@@ -60,6 +60,7 @@ export const signup = async (req, res) => {
         fullname: user.fullname,
         email: user.email,
         isVerified: user.isVerified,
+        lastLogin: user.lastLogin,
       },
     });
   } catch (error) {
@@ -110,6 +111,7 @@ export const login = async (req, res) => {
         fullname: user.fullname,
         email: user.email,
         isVerified: user.isVerified,
+        login: user.lastLogin,
       },
     });
   } catch (err) {
@@ -159,6 +161,7 @@ export const verifyEmail = async (req, res) => {
         email: user.email,
         fullname: user.fullname,
         isVerified: user.isVerified,
+        login: user.lastLogin,
       },
     });
   } catch (err) {
