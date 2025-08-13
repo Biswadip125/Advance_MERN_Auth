@@ -59,6 +59,7 @@ export const signup = async (req, res) => {
         _id: user._id,
         fullname: user.fullname,
         email: user.email,
+        isVerified: user.isVerified,
       },
     });
   } catch (error) {
@@ -108,6 +109,7 @@ export const login = async (req, res) => {
         _id: user._id,
         fullname: user.fullname,
         email: user.email,
+        isVerified: user.isVerified,
       },
     });
   } catch (err) {
@@ -156,6 +158,7 @@ export const verifyEmail = async (req, res) => {
         _id: user._id,
         email: user.email,
         fullname: user.fullname,
+        isVerified: user.isVerified,
       },
     });
   } catch (err) {
