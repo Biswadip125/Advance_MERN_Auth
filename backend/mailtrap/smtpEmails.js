@@ -1,6 +1,8 @@
 import nodemailer from "nodemailer";
 import path from "path";
 import {
+  PASSWORD_RESET_REQUEST_TEMPLATE,
+  PASSWORD_RESET_SUCCESS_TEMPLATE,
   VERIFICATION_EMAIL_TEMPLATE,
   WELCOME_EMAIL_TEMPLATE,
 } from "./emailTemplates.js";
@@ -62,5 +64,55 @@ export const sendWelcomeEmail = async (to, username) => {
   } catch (err) {
     console.log(err);
     throw new Error(`❌ error sending welcome email :  ${err}`);
+  }
+};
+
+export const sendPasswordResetEmail = async (to, resetURL) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: `"AUTH COMPANY" <${process.env.EMAIL_USER}>`,
+      to,
+      subject: "Reset Password",
+      html: PASSWORD_RESET_REQUEST_TEMPLATE.replace("{resetURL}", resetURL),
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("✅ Password Reset Request email sent");
+  } catch (err) {
+    console.log(err);
+    throw new Error(`❌ error sending password reset request email :  ${err}`);
+  }
+};
+
+export const sendPasswordResetSuccessEmail = async (to) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: `"AUTH COMPANY" <${process.env.EMAIL_USER}>`,
+      to,
+      subject: "Password Reset Successfully",
+      html: PASSWORD_RESET_SUCCESS_TEMPLATE,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("✅ Password Reset Success email sent");
+  } catch (err) {
+    console.log(err);
+    throw new Error(`❌ error sending password reset success email :  ${err}`);
   }
 };

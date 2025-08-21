@@ -11,6 +11,8 @@ import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js
 import {
   sendVerficationEmail,
   sendWelcomeEmail,
+  sendPasswordResetEmail,
+  sendPasswordResetSuccessEmail,
 } from "../mailtrap/smtpEmails.js";
 
 export const signup = async (req, res) => {
@@ -61,6 +63,8 @@ export const signup = async (req, res) => {
         email: user.email,
         isVerified: user.isVerified,
         lastLogin: user.lastLogin,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
       },
     });
   } catch (error) {
@@ -112,6 +116,8 @@ export const login = async (req, res) => {
         email: user.email,
         isVerified: user.isVerified,
         login: user.lastLogin,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
       },
     });
   } catch (err) {
@@ -162,6 +168,8 @@ export const verifyEmail = async (req, res) => {
         fullname: user.fullname,
         isVerified: user.isVerified,
         login: user.lastLogin,
+        createdAt: user.createdAt,
+        createdAt: user.createdAt,
       },
     });
   } catch (err) {
@@ -239,7 +247,7 @@ export const resetPasword = async (req, res) => {
 
     await user.save();
 
-    await sendResetSuccessEmail(user.email);
+    await sendPasswordResetSuccessEmail(user.email);
 
     res.status(200).json({
       success: true,
